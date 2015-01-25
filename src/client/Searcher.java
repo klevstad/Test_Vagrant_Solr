@@ -8,8 +8,6 @@ import org.apache.solr.common.SolrDocumentList;
 
 import java.net.MalformedURLException;
 
-
-
 public class Searcher {
   
 	public static void main(String[] args) throws MalformedURLException, SolrServerException {
@@ -17,12 +15,10 @@ public class Searcher {
 	
 	    SolrQuery query = new SolrQuery();
 	    query.setQuery("*");
-	    //query.setFields("id","price","merchant","cat","store");
-	    query.setFilterQueries("id:book-101");
+	    query.setFilterQueries("April", "1992");
 	    query.setStart(0); //Startrad
 	    query.setRows(15); //maksrad
-	    //query.set("defType", "edismax");
-	
+
 	    QueryResponse response = solr.query(query);
 	    SolrDocumentList results = response.getResults();
 	    for (int i = 0; i < results.size(); ++i) {

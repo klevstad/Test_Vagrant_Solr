@@ -13,9 +13,9 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :inline => "curl -s https://get.docker.io/ubuntu/ | sudo sh > /dev/null 2>&1"
 
   config.vm.forward_port 5002, 5000 # HealthKitServer
-  config.vm.forward_port 8984, 8983 # Solr 8983
-  config.vm.forward_port 6378, 6379 # Redis 6379
-  config.vm.forward_port 3307, 3306 # MySQL 3306
+  config.vm.forward_port 8983, 8983 # Solr 8983
+  config.vm.forward_port 6379, 6379 # Redis 6379
+  config.vm.forward_port 3306, 3306 # MySQL 3306
 end
 
 Vagrant.configure("2") do |config|

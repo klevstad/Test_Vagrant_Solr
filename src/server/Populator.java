@@ -16,18 +16,15 @@ public class Populator {
 		
 		Parser parser = new Parser();
 		Populator populator = new Populator();
-		
 		ArrayList<File> textfiles = populator.listFilesForFolder(folder, new ArrayList<File>());
-		
 		HttpSolrServer server = new HttpSolrServer("http://localhost:8983/solr");
 		
 	    //for(int i = 0; i < textfiles.size(); i ++) {
-		for(int i = 0; i < 100; i ++) {
+		for(int i = 0; i < 10000; i ++) {
 
-			NsfDocument nsf = parser.readFile(textfiles.get(i));
+			NsfDocument nsf = parser.parseFile(textfiles.get(i));
 			SolrInputDocument document = populator.mapNsfDocumentToSolrDocument(nsf, i);
 
-			
 			if (document == null){
 				continue;
 			}
@@ -48,11 +45,9 @@ public class Populator {
 		}
 		solrDocument.addField("id", id);
 		solrDocument.addField("title", nsfDocument.getM_title());
-		
-		//solrDocument.addField("type", nsfDocument.getM_type());
-		solrDocument.addField("cat", nsfDocument.getM_nsf_org());
-		/*
-		 * solrDocument.addField("latest_amendment_date", nsfDocument.getM_latest_amendment_date());
+		solrDocument.addField("_type_", nsfDocument.getM_type());
+		solrDocument.addField("nsf_org", nsfDocument.getM_nsf_org());
+		solrDocument.addField("latest_amendment_date", nsfDocument.getM_latest_amendment_date());
 		solrDocument.addField("file", nsfDocument.getM_file());
 		solrDocument.addField("award_number", nsfDocument.getM_award_number());
 		solrDocument.addField("award_instr", nsfDocument.getM_award_instr());
@@ -65,8 +60,8 @@ public class Populator {
 		solrDocument.addField("nsf_program", nsfDocument.getM_nsf_program());
 		solrDocument.addField("fld_applictn", nsfDocument.getM_fld_applictn());
 		solrDocument.addField("program_ref", nsfDocument.getM_program_ref());
-		solrDocument.addField("_abstract", nsfDocument.getM_abstract());
-		 */
+		solrDocument.addField("_abstract_", nsfDocument.getM_abstract());
+		
 		return solrDocument;
 	}
 	
