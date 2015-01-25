@@ -1,4 +1,4 @@
-package test_1;
+package server;
 
 public class NsfDocument {
 	

@@ -1,4 +1,4 @@
-package test_1;
+package client;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
@@ -16,7 +16,7 @@ public class Searcher {
 	    HttpSolrServer solr = new HttpSolrServer("http://localhost:8983/solr");
 	
 	    SolrQuery query = new SolrQuery();
-	    query.setQuery("the hobbit book-104");
+	    query.setQuery("*");
 	    //query.setFields("id","price","merchant","cat","store");
 	    query.setFilterQueries("id:book-101");
 	    query.setStart(0); //Startrad

@@ -1,4 +1,4 @@
-package test_1;
+package server;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 
-public class Test_1 {
+public class Populator {
 	
 	
 	public static void main(String[] args) throws IOException, SolrServerException {
