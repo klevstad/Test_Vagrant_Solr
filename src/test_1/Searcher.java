@@ -18,8 +18,9 @@ public class Searcher {
 	    SolrQuery query = new SolrQuery();
 	    query.setQuery("the hobbit book-104");
 	    //query.setFields("id","price","merchant","cat","store");
+	    query.setFilterQueries("id:book-101");
 	    query.setStart(0); //Startrad
-	    //query.setRows(15); //maksrad
+	    query.setRows(15); //maksrad
 	    //query.set("defType", "edismax");
 	
 	    QueryResponse response = solr.query(query);
