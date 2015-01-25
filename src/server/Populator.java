@@ -21,9 +21,13 @@ public class Populator {
 		
 		HttpSolrServer server = new HttpSolrServer("http://localhost:8983/solr");
 		
-	    for(int i = 0; i < textfiles.size(); i ++) {
+	    //for(int i = 0; i < textfiles.size(); i ++) {
+		for(int i = 0; i < 100; i ++) {
+
 			NsfDocument nsf = parser.readFile(textfiles.get(i));
-			SolrInputDocument document = populator.mapNsfDocumentToSolrDocument(nsf);
+			SolrInputDocument document = populator.mapNsfDocumentToSolrDocument(nsf, i);
+
+			
 			if (document == null){
 				continue;
 			}
@@ -36,31 +40,33 @@ public class Populator {
 	    server.commit();
     }
 	
-	private SolrInputDocument mapNsfDocumentToSolrDocument(NsfDocument nsfDocument){
+	private SolrInputDocument mapNsfDocumentToSolrDocument(NsfDocument nsfDocument, int id){
 		SolrInputDocument solrDocument = new SolrInputDocument();
 		
 		if(nsfDocument == null){
 			return solrDocument;
 		}
+		solrDocument.addField("id", id);
+		solrDocument.addField("title", nsfDocument.getM_title());
 		
-		solrDocument.addField(NsfDocument.TITLE, nsfDocument.getM_title());
-		solrDocument.addField(NsfDocument.TYPE, nsfDocument.getM_type());
-		solrDocument.addField(NsfDocument.NSF_ORG, nsfDocument.getM_nsf_org());
-		solrDocument.addField(NsfDocument.LATEST_AMENDMENT_DATE, nsfDocument.getM_latest_amendment_date());
-		solrDocument.addField(NsfDocument.FILE, nsfDocument.getM_file());
-		solrDocument.addField(NsfDocument.AWARD_NUMBER, nsfDocument.getM_award_number());
-		solrDocument.addField(NsfDocument.AWARD_INSTR, nsfDocument.getM_award_instr());
-		solrDocument.addField(NsfDocument.PRGM_MANAGER, nsfDocument.getM_prgm_manager());
-		solrDocument.addField(NsfDocument.START_DATE, nsfDocument.getM_start_date());
-		solrDocument.addField(NsfDocument.EXPIRES, nsfDocument.getM_expires());
-		solrDocument.addField(NsfDocument.EXPECTED_TOTAL_AMT, nsfDocument.getM_expected_total_amt());
-		solrDocument.addField(NsfDocument.INVESTIGATOR, nsfDocument.getM_investigator());
-		solrDocument.addField(NsfDocument.SPONSOR, nsfDocument.getM_sponsor());
-		solrDocument.addField(NsfDocument.NSF_PROGRAM, nsfDocument.getM_nsf_program());
-		solrDocument.addField(NsfDocument.FLD_APPLICTN, nsfDocument.getM_fld_applictn());
-		solrDocument.addField(NsfDocument.PROGRAM_REF, nsfDocument.getM_program_ref());
-		solrDocument.addField(NsfDocument.ABSTRACT, nsfDocument.getM_abstract());
-
+		//solrDocument.addField("type", nsfDocument.getM_type());
+		solrDocument.addField("cat", nsfDocument.getM_nsf_org());
+		/*
+		 * solrDocument.addField("latest_amendment_date", nsfDocument.getM_latest_amendment_date());
+		solrDocument.addField("file", nsfDocument.getM_file());
+		solrDocument.addField("award_number", nsfDocument.getM_award_number());
+		solrDocument.addField("award_instr", nsfDocument.getM_award_instr());
+		solrDocument.addField("prgm_manager", nsfDocument.getM_prgm_manager());
+		solrDocument.addField("start_date", nsfDocument.getM_start_date());
+		solrDocument.addField("expires", nsfDocument.getM_expires());
+		solrDocument.addField("expected_total_amt", nsfDocument.getM_expected_total_amt());
+		solrDocument.addField("investigator", nsfDocument.getM_investigator());
+		solrDocument.addField("sponsor", nsfDocument.getM_sponsor());
+		solrDocument.addField("nsf_program", nsfDocument.getM_nsf_program());
+		solrDocument.addField("fld_applictn", nsfDocument.getM_fld_applictn());
+		solrDocument.addField("program_ref", nsfDocument.getM_program_ref());
+		solrDocument.addField("_abstract", nsfDocument.getM_abstract());
+		 */
 		return solrDocument;
 	}
 	
