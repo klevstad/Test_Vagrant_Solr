@@ -16,11 +16,11 @@ public class Searcher {
 	    HttpSolrServer solr = new HttpSolrServer("http://localhost:8983/solr");
 	
 	    SolrQuery query = new SolrQuery();
-	    query.setQuery("sony digital camera");
-	    query.addFilterQuery("cat:electronics","store:amazon.com");
-	    query.setFields("id","price","merchant","cat","store");
-	    query.setStart(0);    
-	    query.set("defType", "edismax");
+	    query.setQuery("the hobbit book-104");
+	    //query.setFields("id","price","merchant","cat","store");
+	    query.setStart(0); //Startrad
+	    //query.setRows(15); //maksrad
+	    //query.set("defType", "edismax");
 	
 	    QueryResponse response = solr.query(query);
 	    SolrDocumentList results = response.getResults();
