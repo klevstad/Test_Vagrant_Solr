@@ -12,8 +12,10 @@
 * 'http://localhost:8983/solr' i nettleseren
 
 
-* Parser.java => Her må vi få laget en flott parser som kan ta seg av å det å lese filene. Formatet er kjempefucka, så det det sliter hodet mitt mde.
+* Populator.java => Leser alle filene fra Part1-mappen og kaller parseren på hver fil. Mapper NSF-dokumentet til et Solr-dokument og poster det til Solr-noden.
 
-* Test_1.java => Mainmetoden her klarer å stappe ting inn i en kjørende Solr-node.
+* Parser.java => Parser en tekstfil på en stygg måte ut ifra det formatet vi har og pakker det inn i vårt eget NSF-objekt.
 
-* Dashboard: Klikk på Core selector => Collection 1 => Query, så kan man søke etter ting eller alt eller whatever.
+* Searcher.java => Lettvekter av en søkemetode. Putt inn et "google query" i setFilter(...) så søker den i det som er postet til Solr-noden.
+
+* Nettleser/Dashboard: Klikk på Core selector => Collection 1 => Query. Kan søke etter bestemte ting, eller hele "databasen" for å se at Populator.java fungerer for eksempel.
