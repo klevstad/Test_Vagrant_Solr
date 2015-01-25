@@ -1,24 +1,64 @@
 package server;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 public class NsfDocument {
 	
-	
+	@Field("id")
+	private int m_id;
+	@Field
 	private String m_title;
+	@Field
 	private String m_type;
+	@Field
 	private String m_nsf_org;
+	@Field
 	private String m_latest_amendment_date;
+	@Field
 	private String m_file;
+	@Field
 	private String m_award_number;
+	@Field
 	private String m_award_instr;
+	@Field
 	private String m_prgm_manager;
+	@Field
 	private String m_start_date;
+	@Field
 	private String m_expires;
+	@Field
 	private String m_expected_total_amt;
+	@Field
 	private String m_investigator;
+	@Field
 	private String m_sponsor;
+	@Field
+	private String m_nsf_program;
+	@Field
 	private String m_fld_applictn;
+	@Field
 	private String m_program_ref;
+	@Field
 	private String m_abstract;
+	
+	public static final String TITLE = "Title";
+	public static final String TYPE = "Type";
+	public static final String NSF_ORG = "NSF Org";
+	public static final String LATEST_AMENDMENT_DATE = "Latest Amendment Date";
+	public static final String FILE = "File";
+	public static final String AWARD_NUMBER = "Award Number";
+	public static final String AWARD_INSTR = "Award Instr.";
+	public static final String PRGM_MANAGER = "Prgm Manager";
+	public static final String START_DATE = "Start Date";
+	public static final String EXPIRES = "Expires";
+	public static final String EXPECTED_TOTAL_AMT = "Expected Total Amt.";
+	public static final String INVESTIGATOR = "Investigator";
+	public static final String SPONSOR = "Sponsor";
+	public static final String NSF_PROGRAM = "NSF Program";
+	public static final String FLD_APPLICTN = "Fld Applictn";
+	public static final String PROGRAM_REF = "Program Ref";
+	public static final String ABSTRACT = "Abstract";
+	
 	
 	
 	public NsfDocument() {
@@ -35,9 +75,68 @@ public class NsfDocument {
 		this.m_expected_total_amt = "";
 		this.m_investigator = "";
 		this.m_sponsor = "";
+		this.m_nsf_program = "";
 		this.m_fld_applictn = "";
 		this.m_program_ref = "";
 		this.m_abstract = "";
+	}
+	
+	
+	public void mapToNsfDocumentObject(String property, String value){
+		switch(property){
+		case TITLE:
+			this.setM_title(value);
+			break;
+		case TYPE:
+			this.setM_type(value);
+			break;
+		case NSF_ORG:
+			this.setM_nsf_org(value);
+			break;
+		case LATEST_AMENDMENT_DATE:
+			this.setM_latest_amendment_date(value);
+			break;
+		case FILE:
+			this.setM_file(value);
+			break;
+		case AWARD_NUMBER:
+			this.setM_award_number(value);
+			break;
+		case AWARD_INSTR:
+			this.setM_award_instr(value);
+			break;
+		case PRGM_MANAGER:
+			this.setM_prgm_manager(value);
+			break;
+		case START_DATE:
+			this.setM_start_date(value);
+			break;
+		case EXPIRES:
+			this.setM_expires(value);
+			break;
+		case EXPECTED_TOTAL_AMT:
+			this.setM_expected_total_amt(value);
+			break;
+		case INVESTIGATOR:
+			this.setM_investigator(value);
+			break;
+		case SPONSOR:
+			this.setM_sponsor(value);
+			break;
+		case NSF_PROGRAM:
+			this.setM_nsf_program(value);
+			break;
+		case FLD_APPLICTN:
+			this.setM_fld_applictn(value);
+			break;
+		case PROGRAM_REF:
+			this.setM_program_ref(value);
+			break;
+		case ABSTRACT:
+			this.setM_abstract(value);
+			break;
+		}
+			
 	}
 	
 
@@ -171,6 +270,16 @@ public class NsfDocument {
 	}
 
 
+	public String getM_nsf_program() {
+		return m_nsf_program;
+	}
+
+
+	public void setM_nsf_program(String m_nsf_program) {
+		this.m_nsf_program = m_nsf_program;
+	}
+
+
 	public String getM_fld_applictn() {
 		return m_fld_applictn;
 	}
@@ -199,10 +308,5 @@ public class NsfDocument {
 	public void setM_abstract(String m_abstract) {
 		this.m_abstract = m_abstract;
 	}
-
-
-
-	
-	
 
 }
