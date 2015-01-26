@@ -5,13 +5,9 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
-
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Searcher {
   
@@ -28,9 +24,9 @@ public class Searcher {
 	    query.setRows(15); //maksrad
 	    query.setHighlight(true).setHighlightSnippets(1);
 	    query.setParam("hl.fl", "title");
-        query.setParam("hl.simple.pre", "<em>");
-        query.setParam("hl.simple.post", "</em>");
-        query.setParam("hl.fragsize", "100");
+	    query.setParam("hl.simple.pre", "<em>");
+	    query.setParam("hl.simple.post", "</em>");
+	    query.setParam("hl.fragsize", "100");
 
 	    QueryResponse response = solr.query(query);
 	    
