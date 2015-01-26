@@ -17,10 +17,11 @@ public class Populator {
 		Parser parser = new Parser();
 		Populator populator = new Populator();
 		ArrayList<File> textfiles = populator.listFilesForFolder(folder, new ArrayList<File>());
+		System.out.println("Number of files in Part1: " + textfiles.size());
 		HttpSolrServer server = new HttpSolrServer("http://localhost:8983/solr");
 		
 	    //for(int i = 0; i < textfiles.size(); i ++) {
-		for(int i = 0; i < 10000; i ++) {
+		for(int i = 0; i < 100; i ++) {
 
 			NsfDocument nsf = parser.parseFile(textfiles.get(i));
 			SolrInputDocument document = populator.mapNsfDocumentToSolrDocument(nsf, i);
