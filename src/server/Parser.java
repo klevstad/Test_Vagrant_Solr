@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class Parser {
 	
-	private String[] keywords = {"Title", "Type", "NSF Org", "Latest Amendment Date", "File", "Award Number", "Award Instr.", "Prgm Manager", "Start Date", "Expires", "Expected Total Amt.", "Investigator", "Sponsor", "NSF Program", "Fld Applictn", "Program Ref", "Abstract"};
+	private static final String[] keywords = {"Title", "Type", "NSF Org", "Latest Amendment Date", "File", "Award Number", "Award Instr.", "Prgm Manager", "Start Date", "Expires", "Expected Total Amt.", "Investigator", "Sponsor", "NSF Program", "Fld Applictn", "Program Ref", "Abstract"};
 	
-	public NsfDocument parseFile(File filename){
+	public static NsfDocument parseFile(File filename){
 		BufferedReader reader;
 		NsfDocument doc = new NsfDocument();		
 		boolean first_line = true;

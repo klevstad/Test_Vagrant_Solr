@@ -13,18 +13,16 @@ public class Populator {
 	private final static File folder = new File(".//datasets//Part1");
 
 	public static void main(String[] args) throws IOException, SolrServerException {
-		
-		Parser parser = new Parser();
-		Populator populator = new Populator();
-		ArrayList<File> textfiles = populator.listFilesForFolder(folder, new ArrayList<File>());
+		ArrayList<File> textfiles = listFilesForFolder(folder, new ArrayList<File>());
 		System.out.println("Number of files in Part1: " + textfiles.size());
 		HttpSolrServer server = new HttpSolrServer("http://localhost:8983/solr");
-		
-	    //for(int i = 0; i < textfiles.size(); i ++) {
-		for(int i = 0; i < 100; i ++) {
 
-			NsfDocument nsf = parser.parseFile(textfiles.get(i));
-			SolrInputDocument document = populator.mapNsfDocumentToSolrDocument(nsf, i);
+	    //for(int i = 0; i < textfiles.size(); i ++) {
+		long t1 = System.currentTimeMillis();
+		for(int i = 0; i < 500; i ++) {
+
+			NsfDocument nsf = Parser.parseFile(textfiles.get(i));
+			SolrInputDocument document = mapNsfDocumentToSolrDocument(nsf, i);
 
 			if (document == null){
 				continue;
@@ -34,11 +32,12 @@ public class Populator {
 	    		server.commit();  // periodically flush
 	    	}
 	    }
-	    System.out.println("It all went well. What the fuck.");
+		long t2 = System.currentTimeMillis();
+		System.out.println("Time used populating: "+(t2-t1)+" ms.");
 	    server.commit();
     }
 	
-	private SolrInputDocument mapNsfDocumentToSolrDocument(NsfDocument nsfDocument, int id){
+	private static SolrInputDocument mapNsfDocumentToSolrDocument(NsfDocument nsfDocument, int id){
 		SolrInputDocument solrDocument = new SolrInputDocument();
 		
 		if(nsfDocument == null){
@@ -66,12 +65,12 @@ public class Populator {
 		return solrDocument;
 	}
 	
-	private ArrayList<File> listFilesForFolder(final File folder, ArrayList<File> listOfFiles) {
+	private static ArrayList<File> listFilesForFolder(final File folder, ArrayList<File> listOfFiles) {
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory()) {
 	            listFilesForFolder(fileEntry, listOfFiles);
 	        } else {
-	        	listOfFiles.add(fileEntry);
+	        	if (fileEntry.getName().endsWith(".txt")) listOfFiles.add(fileEntry);
 	        }
 	    }
 	    return listOfFiles;
